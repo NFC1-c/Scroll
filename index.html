@@ -61,19 +61,20 @@ body {
   overflow-x: hidden;
 }
 
-/* شريط الملاحة */
+/* شريط الملاحة العلوي */
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1.5rem var(--g-margin);
+  padding: 1.2rem var(--g-margin);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(180deg, rgba(18,18,18,0.95) 0%, rgba(18,18,18,0) 100%);
-  backdrop-filter: blur(8px);
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo {
@@ -85,29 +86,49 @@ header {
   text-transform: uppercase;
 }
 
-.nav-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.btn-menu {
-  background: var(--c-white);
-  color: var(--c-bg);
-  border: none;
-  padding: 0.8rem 1.8rem;
-  font-size: 1rem;
+.btn-header-menu {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--c-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.6rem 1.4rem;
+  font-size: 0.95rem;
   font-weight: 700;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
-.btn-menu:hover {
+.btn-header-menu:hover {
+  background: var(--c-white);
+  color: var(--c-bg);
+}
+
+/* زر المنيو العائم بالأسفل */
+.floating-menu-btn {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  background: var(--c-white);
+  color: var(--c-bg);
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.floating-menu-btn:hover {
   background: var(--c-wood-light);
   color: var(--c-white);
-  transform: translateY(-2px);
+  transform: translateX(-50%) scale(1.05);
 }
 
 /* القسم الرئيسي (Hero) */
@@ -120,8 +141,7 @@ header {
   text-align: center;
   padding: 8rem 1rem 2rem 1rem;
   background: 
-    radial-gradient(circle at center, rgba(140, 106, 70, 0.15) 0%, rgba(18, 18, 18, 1) 70%),
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 10px);
+    radial-gradient(circle at center, rgba(140, 106, 70, 0.18) 0%, rgba(18, 18, 18, 1) 70%);
 }
 
 .hero-title {
@@ -130,18 +150,17 @@ header {
   letter-spacing: -2px;
   line-height: 1;
   margin-bottom: 1rem;
-  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
 
 .hero-subtitle {
   font-size: var(--p);
   color: var(--c-silver);
   max-width: 600px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   line-height: 1.6;
 }
 
-/* شبكة المعرض والتأثيرات */
+/* شبكة الصور وتأثير التمرير */
 .-w {
   margin-left: var(--g-margin);
   margin-right: var(--g-margin);
@@ -149,7 +168,7 @@ header {
   grid-template-columns: repeat(14, 1fr);
   align-items: start;
   column-gap: var(--g-gap);
-  padding-bottom: 5rem;
+  padding-bottom: 6rem;
 }
 
 .-w figure {
@@ -158,7 +177,6 @@ header {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background-color: var(--c-card);
   box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  position: relative;
 }
 
 .-w figure img {
@@ -168,7 +186,6 @@ header {
   scale: 1.3;
   opacity: 0;
   clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
-  transition: filter 0.5s ease;
 }
 
 .-w figure.-inview img {
@@ -181,19 +198,14 @@ header {
     clip-path var(--easing-timing) var(--easing-function);
 }
 
-.-w figure:hover img {
-  filter: brightness(1.1) scale(1.03);
-}
-
-/* توزيع الصور في الشبكة */
-.-w .image-1 { grid-row-start: 1; grid-column: 2 / 8; height: 480px; }
+.-w .image-1 { grid-row-start: 1; grid-column: 2 / 8; height: 450px; }
 .-w .image-2 { grid-row-start: 1; grid-column: 9 / 14; height: 380px; margin-top: 3rem; }
-.-w .image-3 { grid-row-start: 2; grid-column: 3 / 8; height: 520px; margin-top: 2rem; }
-.-w .image-4 { grid-row-start: 2; grid-column: 9 / 13; height: 420px; margin-top: 1rem; }
+.-w .image-3 { grid-row-start: 2; grid-column: 3 / 8; height: 480px; margin-top: 2rem; }
+.-w .image-4 { grid-row-start: 2; grid-column: 9 / 13; height: 400px; margin-top: 1rem; }
 
 @media (max-width: 900px) {
   .-w { display: flex; flex-direction: column; gap: 2rem; }
-  .-w figure { width: 100% !important; height: 320px !important; margin: 0 !important; }
+  .-w figure { width: 100% !important; height: 300px !important; margin: 0 !important; }
 }
 
 /* نافذة المنيو (Modal) */
@@ -203,16 +215,16 @@ header {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   backdrop-filter: blur(15px);
-  z-index: 200;
+  z-index: 300;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
   pointer-events: none;
   transition: all 0.4s ease;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .menu-modal.active {
@@ -223,27 +235,27 @@ header {
 .menu-content {
   background: var(--c-card);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 24px;
+  border-radius: 20px;
   width: 100%;
-  max-width: 800px;
+  max-width: 750px;
   max-height: 85vh;
   overflow-y: auto;
-  padding: 2.5rem;
+  padding: 2rem;
   position: relative;
   box-shadow: 0 25px 50px rgba(0,0,0,0.8);
 }
 
 .close-btn {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+  top: 1.2rem;
+  left: 1.2rem;
   background: rgba(255, 255, 255, 0.1);
   border: none;
   color: var(--c-white);
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -254,15 +266,14 @@ header {
 
 .menu-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .menu-header h2 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 900;
-  color: var(--c-white);
 }
 
 .menu-header p {
@@ -272,27 +283,27 @@ header {
 }
 
 .menu-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
 }
 
 .menu-section-title {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: var(--c-wood-light);
-  margin-bottom: 1rem;
-  border-right: 4px solid var(--c-wood);
-  padding-right: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-right: 3px solid var(--c-wood);
+  padding-right: 0.6rem;
 }
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
 }
 
 .menu-item {
   background: rgba(255, 255, 255, 0.03);
-  padding: 1rem 1.2rem;
-  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -300,12 +311,12 @@ header {
 }
 
 .menu-item-info h4 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--c-white);
 }
 
 .menu-item-info p {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--c-silver);
   margin-top: 0.2rem;
 }
@@ -313,54 +324,40 @@ header {
 .menu-item-price {
   font-weight: 700;
   color: var(--c-white);
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 /* الفوتر */
 footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 3rem var(--g-margin);
+  padding: 2.5rem var(--g-margin);
   text-align: center;
   color: var(--c-silver);
-}
-
-footer p {
-  margin-bottom: 0.5rem;
-}
-
-.social-links {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.social-links a {
-  color: var(--c-wood-light);
-  text-decoration: none;
-  font-weight: 600;
 }
 </style>
 </head>
 
 <body>
 
-  <!-- الهيدر -->
+  <!-- الهيدر العلوي -->
   <header>
     <a href="#" class="logo">SLVR.</a>
-    <div class="nav-actions">
-      <button class="btn-menu" onclick="toggleMenu()">📋 المنيو | MENU</button>
-    </div>
+    <button class="btn-header-menu" onclick="toggleMenu()">المنيو 📋</button>
   </header>
+
+  <!-- الزر العائم المصمم ليكون ظاهرًا دائمًا بالأسفل -->
+  <button class="floating-menu-btn" onclick="toggleMenu()">
+    <span>📋</span>
+    <span>قائمة المنيو | MENU</span>
+  </button>
 
   <!-- الواجهة الرئيسية -->
   <section class="hero">
     <h1 class="hero-title">SLVR.</h1>
-    <p class="hero-subtitle">حيث تلتقي القهوة المختصة بالدقة والتصميم الفاخر. تجربة استثنائية مصممة لعشاق الذوق الرفيع.</p>
-    <button class="btn-menu" onclick="toggleMenu()" style="padding: 1rem 2.5rem; font-size: 1.1rem;">استكشف قائمة المشروبات</button>
+    <p class="hero-subtitle">حيث تلتقي القهوة المختصة بالتصميم الفاخر. اضغط على الزر العائم في الأسفل لاستعراض المنيو.</p>
   </section>
 
-  <!-- معرض الصور التفاعلي (Reveal on Scroll) -->
+  <!-- معرض الصور مع تأثير Reveal on Scroll -->
   <div class="-w">
     <figure class="image-1" string string-repeat>
       <img string="lazy" string-lazy="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80" alt="SLVR Specialty Coffee">
@@ -379,7 +376,7 @@ footer p {
     </figure>
   </div>
 
-  <!-- نافذة المنيو التفاعلية (Modal) -->
+  <!-- نافذة المنيو المنبثقة -->
   <div id="menuModal" class="menu-modal">
     <div class="menu-content">
       <button class="close-btn" onclick="toggleMenu()">&times;</button>
@@ -403,14 +400,14 @@ footer p {
           <div class="menu-item">
             <div class="menu-item-info">
               <h4>فلات وايت (Flat White)</h4>
-              <p>إسبريسو مزدوج مع حليب مبخر دقيق</p>
+              <p>إسبريسو مزدوج مع حليب مبخر</p>
             </div>
             <span class="menu-item-price">18 SAR</span>
           </div>
           <div class="menu-item">
             <div class="menu-item-info">
               <h4>V60 تقطير (Filter Coffee)</h4>
-              <p>محاصيل مختارة (إثيوبيا / كولومبيا)</p>
+              <p>محاصيل مختارة</p>
             </div>
             <span class="menu-item-price">22 SAR</span>
           </div>
@@ -419,26 +416,26 @@ footer p {
 
       <!-- قسم المشروبات الباردة -->
       <div class="menu-section">
-        <h3 class="menu-section-title">المشروبات الباردة والخاصة (Cold & Signatures)</h3>
+        <h3 class="menu-section-title">المشروبات الباردة (Cold Drinks)</h3>
         <div class="menu-grid">
           <div class="menu-item">
             <div class="menu-item-info">
               <h4>SLVR. Latte (سلوفر لاتيه)</h4>
-              <p>مشروبنا الخاص بقوام كريمي ونكهة متميزة</p>
+              <p>مشروب المقهى الخاص</p>
             </div>
             <span class="menu-item-price">24 SAR</span>
           </div>
           <div class="menu-item">
             <div class="menu-item-info">
               <h4>آيس ماتشا (Iced Matcha)</h4>
-              <p>ماتشا يابانية فاخرة مع الحليب</p>
+              <p>ماتشا يابانية فاخرة</p>
             </div>
             <span class="menu-item-price">25 SAR</span>
           </div>
           <div class="menu-item">
             <div class="menu-item-info">
               <h4>آيس دريب (Iced Drip)</h4>
-              <p>قهوة مقطرة باردة ومنعشة</p>
+              <p>قهوة مقطرة باردة</p>
             </div>
             <span class="menu-item-price">23 SAR</span>
           </div>
@@ -447,18 +444,18 @@ footer p {
 
       <!-- قسم الحلويات -->
       <div class="menu-section">
-        <h3 class="menu-section-title">المخبوزات والحلويات (Pastries & Desserts)</h3>
+        <h3 class="menu-section-title">الحلويات والمخبوزات (Desserts)</h3>
         <div class="menu-grid">
           <div class="menu-item">
             <div class="menu-item-info">
               <h4>سلوفر كوكيز (SLVR Cookie)</h4>
-              <p>كوكيز ساخن بالشوكولاتة الفاخرة</p>
+              <p>كوكيز ساخن بالشوكولاتة</p>
             </div>
             <span class="menu-item-price">16 SAR</span>
           </div>
           <div class="menu-item">
             <div class="menu-item-info">
-              <h4>كرواسون الزبدة (Butter Croissant)</h4>
+              <h4>كرواسون (Croissant)</h4>
               <p>طازج يومياً</p>
             </div>
             <span class="menu-item-price">15 SAR</span>
@@ -469,18 +466,11 @@ footer p {
     </div>
   </div>
 
-  <!-- الفوتر -->
   <footer>
-    <p style="font-weight: 800; font-size: 1.5rem; color: var(--c-white);">SLVR.</p>
-    <p>SPECIALTY COFFEE • 2026</p>
-    <div class="social-links">
-      <a href="#">Instagram</a>
-      <a href="#">TikTok</a>
-      <a href="#">الموقع على الخريطة</a>
-    </div>
+    <p style="font-weight: 800; font-size: 1.3rem; color: var(--c-white);">SLVR.</p>
+    <p>SPECIALTY COFFEE</p>
   </footer>
 
-  <!-- السكريبت التشغيلي -->
   <script>
     // تهيئة مكتبة StringTune
     const stringTune = StringTune.StringTune.getInstance();
